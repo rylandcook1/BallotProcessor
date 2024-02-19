@@ -109,11 +109,11 @@ void BallotRound(vector<string> candidates, vector<vector<int>> voteIndex) {
     int voteOver = 0;
     int roundNumber = 1;
     while (voteOver == 0) {
-        vector<int> candidateVotes;
         double totalVoteSum = 0;
         double maxPercentage = 0;
         int percIndex = 0;
         int indexLowestFirst = 10000;
+        vector<int> candidateVotes;
         
         cout << "ROUND " << roundNumber << endl;
         cout << "-----------------------" << endl;
@@ -125,15 +125,16 @@ void BallotRound(vector<string> candidates, vector<vector<int>> voteIndex) {
         }
 
         for (int i = 0; i < candidates.size(); i++) {
-            double a = candidateVotes[i];
-            double perc = a / totalVoteSum * 1.0;
+            double voteDecimalConversion = candidateVotes[i];
+            double currentPercentage = voteDecimalConversion / totalVoteSum * 1.0;
 
             // Sets the maximum percentage of votes found
-            if (perc > maxPercentage) {
-                maxPercentage = perc;
+            if (currentPercentage > maxPercentage) {
+                maxPercentage = currentPercentage;
                 percIndex = i;
             }
 
+            // Finds lowest number of first choice votes
             for (int i = 0; i < candidates.size(); i++) {
                 if (voteIndex[i][0] < indexLowestFirst) {
                     indexLowestFirst = voteIndex[i][0];
@@ -142,12 +143,10 @@ void BallotRound(vector<string> candidates, vector<vector<int>> voteIndex) {
             }
 
             // Prints the results for each candidate
-            cout << candidates[i] << ": " << perc * 100.0 << "% (" << candidateVotes[i] << " votes)" << endl;
+            cout << candidates[i] << ": " << currentPercentage * 100.0 << "% (" << candidateVotes[i] << " votes)" << endl;
         }
 
         cout << endl;
-
-        int oldVectorSize = candidates.size();
 
         if (maxPercentage > 0.5) {
             cout << "Winner: " << candidates[percIndex] << endl;
