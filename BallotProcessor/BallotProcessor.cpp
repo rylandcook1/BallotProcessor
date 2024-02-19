@@ -156,23 +156,14 @@ void BallotRound(vector<string> candidates, vector<vector<int>> voteIndex) {
         else {
             cout << "Nobody won. Another round is needed." << endl;
 
+            // Removes candidates if they received no votes or received the lowest amount of first choice votes
             for (int j = 0; j < candidates.size(); j++) {
                 for (int i = 0; i < candidates.size(); i++) {
-                    if (candidateVotes[i] == 0) {
+                    if (candidateVotes[i] == 0 || voteIndex[i][0] == indexLowestFirst) {
                         candidates.erase(candidates.begin() + i);
                         voteIndex.erase(voteIndex.begin() + i);
                         candidateVotes.erase(candidateVotes.begin() + i);
 
-                    }
-                }
-            }
-            
-            for (int j = 0; j < candidates.size(); j++) {
-                for (int i = 0; i < candidates.size(); i++) {
-                    if (voteIndex[i][0] == indexLowestFirst) {
-                        candidates.erase(candidates.begin() + i);
-                        voteIndex.erase(voteIndex.begin() + i);
-                        candidateVotes.erase(candidateVotes.begin() + i);
                     }
                 }
             }
