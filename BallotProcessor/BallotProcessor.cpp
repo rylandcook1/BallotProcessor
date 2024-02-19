@@ -167,9 +167,6 @@ void BallotRound(vector<string> candidates, vector<vector<int>> voteIndex) {
                 }
             }
             
-            
-            
-
             for (int j = 0; j < candidates.size(); j++) {
                 for (int i = 0; i < candidates.size(); i++) {
                     if (voteIndex[i][0] == indexLowestFirst) {
