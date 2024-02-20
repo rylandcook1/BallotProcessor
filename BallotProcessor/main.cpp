@@ -1,5 +1,3 @@
-// main.cpp : 
-
 #include "FileReader.h"
 #include "Ballot.h"
 #include <iostream>
