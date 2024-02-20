@@ -25,6 +25,15 @@ void Ballot::BallotRound(vector<string> candidates, vector<vector<int>> voteInde
             totalVoteSum += sum;
         }
 
+        // Finds lowest number of first choice votes
+        for (int i = 0; i < candidates.size(); i++) {
+            if (voteIndex[i][0] < indexLowestFirst) {
+                indexLowestFirst = voteIndex[i][0];
+            }
+
+        }
+
+        // Calculates percentages of votes that candidates got and signifies whether they got eliminated or not
         for (int i = 0; i < candidates.size(); i++) {
             double voteDecimalConversion = candidateVotes[i];
             double currentPercentage = voteDecimalConversion / totalVoteSum * 1.0;
@@ -35,20 +44,21 @@ void Ballot::BallotRound(vector<string> candidates, vector<vector<int>> voteInde
                 percIndex = i;
             }
 
-            // Finds lowest number of first choice votes
-            for (int i = 0; i < candidates.size(); i++) {
-                if (voteIndex[i][0] < indexLowestFirst) {
-                    indexLowestFirst = voteIndex[i][0];
-                }
-
-            }
-
             // Prints the results for each candidate
-            cout << candidates[i] << ": " << currentPercentage * 100.0 << "% (" << candidateVotes[i] << " votes)" << endl;
+            cout << candidates[i] << ": " << currentPercentage * 100.0 << "% (" << candidateVotes[i] << " votes)";
+
+            if (candidateVotes[i] == 0 || voteIndex[i][0] == indexLowestFirst) {
+                cout << " <---- [ELIMINATED]" << endl;
+            }
+            else {
+                cout << endl;
+            }
         }
 
+        // Spacer
         cout << endl;
-
+        
+        // If a win is found in the current round, the loop exits. If not, eliminations are made
         if (maxPercentage > 0.5) {
             cout << "Winner: " << candidates[percIndex] << endl;
             voteOver++;
