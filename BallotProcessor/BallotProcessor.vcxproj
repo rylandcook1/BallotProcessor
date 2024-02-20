@@ -127,10 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BallotProcessor.cpp" />
+    <ClCompile Include="Ballot.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="FileReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\Downloads\SmallListBallots.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ballot.h" />
+    <ClInclude Include="FileReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
